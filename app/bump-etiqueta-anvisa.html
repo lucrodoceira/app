@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gerador de Etiqueta da Doceira</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%8F%B7%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="../img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Etiqueta">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#c23a5b">
+<style>
+  :root{--bg:#fbf6f1;--card:#fff;--ink:#4a3730;--muted:#a2938a;--line:#efe4da;
+    --accent:#d24f6e;--accent2:#f0a05a;--ok:#2f9e6f;--soft:#fbeee6;
+    --shadow:0 8px 24px rgba(150,100,80,.10);--shadow-sm:0 3px 10px rgba(150,100,80,.08);}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:16px;line-height:1.5}
+  .app{max-width:600px;margin:0 auto;padding-bottom:40px}
+  header{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
+    padding:20px 18px 16px;border-radius:0 0 22px 22px;box-shadow:var(--shadow)}
+  header .brand{display:flex;align-items:center;gap:11px}
+  header .logo{width:42px;height:42px;background:rgba(255,255,255,.2);border-radius:13px;
+    display:flex;align-items:center;justify-content:center;font-size:23px;flex:0 0 auto}
+  header h1{font-size:19px;margin:0;font-weight:800}
+  header p{margin:2px 0 0;font-size:13px;opacity:.92}
+  main{padding:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px;
+    margin:12px 0;box-shadow:var(--shadow-sm)}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.7px;color:var(--accent);margin:0 0 4px;font-weight:800}
+  .card .desc{font-size:13px;color:var(--muted);margin:0 0 12px}
+  label{display:block;font-size:12.5px;color:var(--muted);margin:0 0 5px;font-weight:600;line-height:1.3}
+  input,textarea{width:100%;font-size:16px;padding:12px;border:1.5px solid var(--line);border-radius:12px;
+    background:#fff;color:var(--ink);outline:none;font-family:inherit}
+  textarea{min-height:92px;resize:vertical}
+  input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(210,79,110,.12)}
+  .row{display:flex;gap:9px}.row>div{flex:1;min-width:0}.mt{margin-top:12px}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;
+    padding:8px 13px;font-size:13.5px;font-weight:700;cursor:pointer;user-select:none}
+  .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .aviso{background:#fff8ec;border:1px solid #f2dcae;border-radius:12px;padding:12px 13px;font-size:12.5px;
+    color:#8a6d2f;line-height:1.5;margin-top:12px}
+  .btn{display:block;width:100%;text-align:center;padding:14px;border-radius:13px;font-size:16px;
+    font-weight:800;border:none;cursor:pointer;margin-top:11px;background:var(--soft);color:var(--ink)}
+  /* etiqueta gerada */
+  .etq{border:2px solid var(--ink);border-radius:10px;padding:14px;background:#fff;color:#111;
+    font-family:"Segoe UI",Arial,sans-serif;font-size:13px;line-height:1.45}
+  .etq .nome{font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;border-bottom:2px solid #111;padding-bottom:6px;margin-bottom:8px}
+  .etq p{margin:4px 0}
+  .etq .alerg{font-weight:800;text-transform:uppercase}
+  .etq .linha{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .etq .rod{border-top:1px solid #999;margin-top:8px;padding-top:6px;font-size:11.5px;color:#333}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo">🏷️</div>
+      <div><h1>Gerador de Etiqueta da Doceira</h1><p>O rótulo dos seus doces, pronto pra imprimir</p></div>
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <h2>O produto</h2>
+      <div><label>Nome do produto</label><input id="nome" placeholder="Ex: Brigadeiro gourmet"></div>
+      <div class="mt"><label>Ingredientes (do que tem MAIS pro que tem MENOS, um por linha)</label>
+        <textarea id="ings" placeholder="Leite condensado&#10;Chocolate em pó&#10;Manteiga&#10;Granulado"></textarea></div>
+      <p class="hint">A ordem importa: a lei pede do ingrediente de maior quantidade para o de menor.</p>
+    </div>
+
+    <div class="card">
+      <h2>Contém alérgicos?</h2>
+      <p class="desc">Toque nos que a receita tem. A lei exige avisar (RDC 26/2015).</p>
+      <div class="chips" id="chips"></div>
+      <div class="mt"><label>Pode conter (contaminação cruzada, opcional)</label>
+        <input id="podeConter" placeholder="Ex: amendoim, castanhas"></div>
+    </div>
+
+    <div class="card">
+      <h2>Peso, datas e lote</h2>
+      <div class="row">
+        <div><label>Peso / conteúdo</label><input id="peso" placeholder="Ex: 20g cada"></div>
+        <div><label>Fabricação</label><input id="fab" type="date"></div>
+      </div>
+      <div class="row mt">
+        <div><label>Validade (dias)</label><input id="valDias" type="number" inputmode="numeric" placeholder="Ex: 5"></div>
+        <div><label>Lote</label><input id="lote" placeholder="gerado sozinho"></div>
+      </div>
+      <div class="mt"><label>Conservação</label><input id="conserv" placeholder="Ex: Manter refrigerado"></div>
+    </div>
+
+    <div class="card">
+      <h2>Quem fez (obrigatório na lei)</h2>
+      <div><label>Nome / marca</label><input id="fabNome" placeholder="Ex: Doces da Ana"></div>
+      <div class="row mt">
+        <div><label>CPF ou CNPJ</label><input id="fabDoc" placeholder="000.000.000-00"></div>
+        <div><label>Telefone</label><input id="fabTel" placeholder="(11) 90000-0000"></div>
+      </div>
+      <div class="mt"><label>Endereço (cidade/UF já ajuda)</label><input id="fabEnd" placeholder="Ex: São Paulo - SP"></div>
+    </div>
+
+    <div class="card">
+      <h2>Sua etiqueta</h2>
+      <div class="etq" id="etq"></div>
+      <button class="btn" id="btnBaixar" style="background:var(--accent);color:#fff">📥 Baixar etiqueta (imagem)</button>
+      <button class="btn" id="btnCopiar">Copiar texto da etiqueta</button>
+      <p class="hint">Baixe a imagem e mande direto pra gráfica, pro app de fazer adesivo, ou cole na embalagem.</p>
+      <div class="aviso" id="aviso">
+        <b>Atenção:</b> esta etiqueta cobre os itens obrigatórios da RDC 259/2002 e o aviso de
+        alérgicos (RDC 26/2015). A <b>tabela nutricional</b> pode ser exigida dependendo do seu
+        volume de produção, e existem isenções para pequeno produtor artesanal. Confirme a sua
+        situação com a <b>vigilância sanitária do seu município</b>.
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var $=function(id){return document.getElementById(id)};
+  var KEY="etiqueta_doceira_v1";
+  var ALERG=["Leite","Ovos","Trigo (glúten)","Soja","Amendoim","Castanhas","Amêndoas","Leite de coco"];
+  var sel={};
+
+  var chipsEl=$("chips");
+  ALERG.forEach(function(a){
+    var c=document.createElement("div");c.className="chip";c.textContent=a;
+    c.addEventListener("click",function(){sel[a]=!sel[a];c.classList.toggle("on",!!sel[a]);render();save();});
+    chipsEl.appendChild(c);
+  });
+
+  function fmtData(str){
+    if(!str)return "";
+    var p=str.split("-"); if(p.length!==3)return "";
+    return p[2]+"/"+p[1]+"/"+p[0];
+  }
+  function addDias(str,dias){
+    if(!str||!(dias>0))return "";
+    var p=str.split("-"); var d=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));
+    d.setDate(d.getDate()+parseInt(dias));
+    var dd=("0"+d.getDate()).slice(-2),mm=("0"+(d.getMonth()+1)).slice(-2);
+    return dd+"/"+mm+"/"+d.getFullYear();
+  }
+  function loteAuto(str){
+    if(!str)return "";
+    var p=str.split("-"); return "L"+p[2]+p[1]+p[0].slice(-2);
+  }
+
+  function coletar(){
+    var nome=$("nome").value.trim()||"Nome do produto";
+    var ings=$("ings").value.split("\n").map(function(s){return s.trim()}).filter(Boolean);
+    var contem=ALERG.filter(function(a){return sel[a]});
+    var podeConter=$("podeConter").value.trim();
+    var peso=$("peso").value.trim();
+    var fab=$("fab").value, valDias=$("valDias").value;
+    var loteV=$("lote").value.trim()||loteAuto(fab);
+    var conserv=$("conserv").value.trim();
+    var fabNome=$("fabNome").value.trim(), fabDoc=$("fabDoc").value.trim();
+    var fabTel=$("fabTel").value.trim(), fabEnd=$("fabEnd").value.trim();
+    var rod=[];
+    if(fabNome)rod.push("Fabricado por "+fabNome);
+    if(fabDoc)rod.push("CPF/CNPJ "+fabDoc);
+    if(fabEnd)rod.push(fabEnd);
+    if(fabTel)rod.push("Contato "+fabTel);
+    return{nome:nome,ings:ings,contem:contem,podeConter:podeConter,peso:peso,
+      loteV:loteV,fabTxt:fab?fmtData(fab):"",valTxt:addDias(fab,valDias),conserv:conserv,rod:rod};
+  }
+
+  function render(){
+    var d=coletar();
+    var html="";
+    html+='<div class="nome">'+esc(d.nome)+'</div>';
+    html+='<p><b>Ingredientes:</b> '+(d.ings.length?esc(d.ings.join(", "))+".":"(preencha os ingredientes)")+'</p>';
+    if(d.contem.length) html+='<p class="alerg">Alérgicos: contém '+esc(d.contem.join(", "))+'.</p>';
+    if(d.podeConter) html+='<p class="alerg">Pode conter '+esc(d.podeConter)+'.</p>';
+    html+='<div class="linha">';
+    if(d.peso) html+='<span><b>Peso:</b> '+esc(d.peso)+'</span>';
+    if(d.loteV) html+='<span><b>Lote:</b> '+esc(d.loteV)+'</span>';
+    html+='</div>';
+    html+='<div class="linha">';
+    if(d.fabTxt) html+='<span><b>Fabricação:</b> '+d.fabTxt+'</span>';
+    if(d.valTxt) html+='<span><b>Validade:</b> '+d.valTxt+'</span>';
+    html+='</div>';
+    if(d.conserv) html+='<p><b>Conservação:</b> '+esc(d.conserv)+'</p>';
+    html+='<div class="rod">'+(d.rod.length?esc(d.rod.join(" · ")):"(preencha quem fez, é obrigatório)")+'</div>';
+    $("etq").innerHTML=html;
+    window.__etqTxt=$("etq").innerText;
+  }
+  function esc(s){return (s+"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+  function wrapText(ctx,text,maxW){
+    var words=(text+"").split(" ");
+    var lines=[],cur="";
+    words.forEach(function(w){
+      var t=cur?cur+" "+w:w;
+      if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=w;}else{cur=t;}
+    });
+    if(cur)lines.push(cur);
+    return lines;
+  }
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+  }
+  function gerarImagem(){
+    var d=coletar();
+    var W=680,PAD=32,maxW=W-PAD*2;
+    var canvas=document.createElement("canvas");
+    var ctx=canvas.getContext("2d");
+    var itens=[];
+    function textoItem(texto,size,weight,color){
+      ctx.font=weight+" "+size+"px Arial, sans-serif";
+      itens.push({tipo:"texto",linhas:wrapText(ctx,texto,maxW),size:size,weight:weight,color:color});
+    }
+    textoItem(d.nome.toUpperCase(),22,"bold","#111");
+    itens.push({tipo:"divisor",grosso:true});
+    textoItem("Ingredientes: "+(d.ings.length?d.ings.join(", ")+".":"(preencha os ingredientes)"),15,"normal","#111");
+    if(d.contem.length) textoItem("Alérgicos: contém "+d.contem.join(", ")+".",15,"bold","#111");
+    if(d.podeConter) textoItem("Pode conter "+d.podeConter+".",15,"bold","#111");
+    var l1=[];if(d.peso)l1.push("Peso: "+d.peso);if(d.loteV)l1.push("Lote: "+d.loteV);
+    if(l1.length) textoItem(l1.join("      "),15,"normal","#111");
+    var l2=[];if(d.fabTxt)l2.push("Fabricação: "+d.fabTxt);if(d.valTxt)l2.push("Validade: "+d.valTxt);
+    if(l2.length) textoItem(l2.join("      "),15,"normal","#111");
+    if(d.conserv) textoItem("Conservação: "+d.conserv,15,"normal","#111");
+    itens.push({tipo:"divisor",grosso:false});
+    textoItem(d.rod.length?d.rod.join("  ·  "):"(preencha quem fez, é obrigatório)",12.5,"normal","#333");
+
+    var y=PAD;
+    itens.forEach(function(it){
+      if(it.tipo==="divisor"){y+=it.grosso?16:12;return;}
+      it.linhas.forEach(function(){y+=it.size+9;});
+      y+=6;
+    });
+    var H=y+PAD;
+
+    canvas.width=W;canvas.height=H;
+    ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);
+    ctx.lineWidth=3;ctx.strokeStyle="#111";
+    roundRect(ctx,4,4,W-8,H-8,12);ctx.stroke();
+
+    y=PAD;
+    itens.forEach(function(it){
+      if(it.tipo==="divisor"){
+        ctx.strokeStyle=it.grosso?"#111":"#999";ctx.lineWidth=it.grosso?2:1;
+        var yy=y+(it.grosso?8:6);
+        ctx.beginPath();ctx.moveTo(PAD,yy);ctx.lineTo(W-PAD,yy);ctx.stroke();
+        y+=it.grosso?16:12;return;
+      }
+      ctx.font=it.weight+" "+it.size+"px Arial, sans-serif";
+      ctx.fillStyle=it.color;
+      it.linhas.forEach(function(t){y+=it.size+9;ctx.fillText(t,PAD,y-3);});
+      y+=6;
+    });
+
+    var url=canvas.toDataURL("image/png");
+    var a=document.createElement("a");
+    a.href=url;
+    a.download="etiqueta-"+(d.nome||"doce").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")+".png";
+    document.body.appendChild(a);a.click();a.remove();
+    var b=$("btnBaixar"),o=b.textContent;b.textContent="Baixado! ✓";setTimeout(function(){b.textContent=o;},1500);
+  }
+
+  function save(){try{
+    localStorage.setItem(KEY,JSON.stringify({
+      nome:$("nome").value,ings:$("ings").value,podeConter:$("podeConter").value,peso:$("peso").value,
+      fab:$("fab").value,valDias:$("valDias").value,lote:$("lote").value,conserv:$("conserv").value,
+      fabNome:$("fabNome").value,fabDoc:$("fabDoc").value,fabTel:$("fabTel").value,fabEnd:$("fabEnd").value,sel:sel}));
+  }catch(e){}}
+  function load(){var st=null;try{st=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+    if(!st)return;
+    ["nome","ings","podeConter","peso","fab","valDias","lote","conserv","fabNome","fabDoc","fabTel","fabEnd"].forEach(function(k){if(st[k]!=null&&$(k))$(k).value=st[k];});
+    sel=st.sel||{};
+    [].slice.call(chipsEl.children).forEach(function(c){c.classList.toggle("on",!!sel[c.textContent]);});
+  }
+
+  document.querySelectorAll("input,textarea").forEach(function(el){el.addEventListener("input",function(){render();save();});});
+  $("btnBaixar").addEventListener("click",gerarImagem);
+  $("btnCopiar").addEventListener("click",function(){
+    var t=window.__etqTxt||"";
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){flash("Copiado! ✓")});}
+    else{var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}ta.remove();flash("Copiado! ✓");}
+  });
+  function flash(m){var b=$("btnCopiar"),o=b.textContent;b.textContent=m;setTimeout(function(){b.textContent=o},1500);}
+
+  load();render();
+})();
+</script>
+</body>
+</html>

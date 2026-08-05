@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Biblioteca de Insumos da Doceira</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%A7%81%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="../img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Biblioteca">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#c23a5b">
+<style>
+  :root{
+    --bg:#fbf6f1;--card:#fff;--ink:#4a3730;--muted:#a2938a;--line:#efe4da;
+    --accent:#d24f6e;--accent2:#f0a05a;--ok:#2f9e6f;--soft:#fbeee6;
+    --shadow:0 8px 24px rgba(150,100,80,.10);--shadow-sm:0 3px 10px rgba(150,100,80,.08);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:16px;line-height:1.5}
+  .app{max-width:600px;margin:0 auto;padding-bottom:30px}
+  header{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
+    padding:20px 18px 16px;border-radius:0 0 22px 22px;box-shadow:var(--shadow)}
+  header .brand{display:flex;align-items:center;gap:11px}
+  header .logo{width:42px;height:42px;background:rgba(255,255,255,.2);border-radius:13px;
+    display:flex;align-items:center;justify-content:center;font-size:23px;flex:0 0 auto}
+  header h1{font-size:19px;margin:0;font-weight:800}
+  header p{margin:2px 0 0;font-size:13px;opacity:.92}
+  main{padding:14px}
+  .search{position:sticky;top:0;z-index:3;background:var(--bg);padding:8px 0 10px}
+  .search input{width:100%;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);
+    border-radius:13px;background:#fff;outline:none;height:48px}
+  .search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(210,79,110,.12)}
+  .intro{font-size:13px;color:var(--muted);margin:0 0 10px;line-height:1.5}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+    margin-bottom:10px;box-shadow:var(--shadow-sm)}
+  .item .nome{font-weight:800;font-size:15px}
+  .item .pac{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .item .lin{display:flex;gap:10px;align-items:flex-end;margin-top:10px}
+  .item .lin>div{flex:1}
+  label{display:block;font-size:12px;color:var(--muted);margin:0 0 4px;font-weight:600}
+  input.preco{width:100%;font-size:16px;padding:11px 12px;border:1.5px solid var(--line);
+    border-radius:11px;background:#fff;outline:none;height:44px}
+  input.preco:focus{border-color:var(--accent)}
+  .out{flex:1.1;background:var(--soft);border-radius:11px;padding:8px 11px;min-height:44px;
+    display:flex;flex-direction:column;justify-content:center}
+  .out .big{font-weight:800;color:var(--accent);font-size:15px;line-height:1.15}
+  .out .small{font-size:11px;color:var(--muted)}
+  .none{text-align:center;color:var(--muted);padding:24px 10px;font-size:14px}
+  footer{text-align:center;color:var(--muted);font-size:11.5px;padding:16px 20px 8px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo">🧁</div>
+      <div>
+        <h1>Biblioteca de Insumos da Doceira</h1>
+        <p>O custo por grama de cada item, na hora</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <p class="intro">Ache o insumo, o tamanho do pacote já vem preenchido. Você só digita quanto pagou e vê o custo, pronto pra usar na Calculadora. Seus preços ficam salvos.</p>
+    <div class="search"><input id="busca" placeholder="🔎 Buscar insumo (ex: leite condensado)" autocomplete="off"></div>
+    <div id="lista"></div>
+    <div class="none" id="vazio" hidden>Nenhum insumo com esse nome. Tente outra palavra.</div>
+  </main>
+  <footer>Seus preços ficam salvos só neste aparelho.<br>Biblioteca de Insumos da Doceira</footer>
+</div>
+<script>
+(function(){
+  "use strict";
+  var KEY="insumos_doceira_v1";
+  var INS=[
+    ["Leite condensado",395,"g"],["Creme de leite",200,"g"],["Chocolate em pó 50%",200,"g"],
+    ["Chocolate granulado",130,"g"],["Manteiga",200,"g"],["Margarina",500,"g"],
+    ["Açúcar refinado",1000,"g"],["Açúcar de confeiteiro",500,"g"],["Açúcar cristal",1000,"g"],
+    ["Farinha de trigo",1000,"g"],["Amido de milho",200,"g"],["Leite integral",1000,"ml"],
+    ["Leite em pó",400,"g"],["Ovos (dúzia)",12,"un"],["Fermento químico",100,"g"],
+    ["Chocolate meio amargo (barra)",1000,"g"],["Chocolate ao leite (barra)",1000,"g"],
+    ["Chocolate branco (barra)",1000,"g"],["Cacau em pó 100%",200,"g"],["Coco ralado",100,"g"],
+    ["Doce de leite",400,"g"],["Nutella",650,"g"],["Cream cheese",150,"g"],
+    ["Essência de baunilha",30,"ml"],["Corante em gel",25,"g"],["Gelatina incolor (sachê)",12,"g"],
+    ["Óleo",900,"ml"],["Morango (bandeja)",300,"g"],["Leite de coco",200,"ml"],
+    ["Paçoca (pacote)",1000,"g"],["Bolacha maisena",400,"g"],["Açúcar mascavo",1000,"g"],
+    ["Forminha nº4 (pacote)",100,"un"],["Forminha de festa (pacote)",100,"un"],
+    ["Embalagem/caixa (pacote)",50,"un"],["Colher/pazinha (pacote)",50,"un"]
+  ];
+  var precos={};
+  try{precos=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){precos={}}
+
+  var listaEl=document.getElementById("lista"), vazio=document.getElementById("vazio");
+
+  function brl(n){if(!isFinite(n))n=0;return "R$ "+n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function unidadeLabel(u){return u==="un"?"por unidade":("por 100 "+u);}
+  function custoTexto(preco,q,u){
+    if(!(preco>0)||!(q>0))return {big:"-",small:"digite o preço"};
+    if(u==="un"){return {big:brl(preco/q),small:"por unidade"};}
+    return {big:brl(preco/q*100),small:"por 100 "+u+"  ·  "+brl(preco/q)+"/"+u};
+  }
+  function norm(s){return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
+
+  function render(filtro){
+    filtro=norm(filtro);
+    listaEl.innerHTML="";
+    var n=0;
+    INS.forEach(function(it,idx){
+      var nome=it[0],q=it[1],u=it[2];
+      if(filtro && norm(nome).indexOf(filtro)<0)return;
+      n++;
+      var pv=precos[nome]!=null?precos[nome]:"";
+      var d=document.createElement("div");d.className="item";
+      d.innerHTML=
+        '<div class="nome">'+nome+'</div>'+
+        '<div class="pac">Pacote padrão: '+(u==="un"?(q+" un"):(q>=1000?(q/1000+(u==="g"?" kg":" L")):(q+" "+u)))+'  ·  '+unidadeLabel(u)+'</div>'+
+        '<div class="lin">'+
+          '<div><label>Quanto você paga? (R$)</label><input class="preco" type="number" inputmode="decimal" value="'+pv+'" data-nome="'+nome+'" placeholder="0,00"></div>'+
+          '<div class="out"><span class="big">-</span><span class="small">custo</span></div>'+
+        '</div>';
+      var inp=d.querySelector(".preco"), out=d.querySelector(".out");
+      function upd(){
+        var p=parseFloat(inp.value)||0;
+        var r=custoTexto(p,q,u);
+        out.querySelector(".big").textContent=r.big;
+        out.querySelector(".small").textContent=r.small;
+        if(inp.value===""){delete precos[nome];}else{precos[nome]=inp.value;}
+        try{localStorage.setItem(KEY,JSON.stringify(precos))}catch(e){}
+      }
+      inp.addEventListener("input",upd);
+      upd();
+      listaEl.appendChild(d);
+    });
+    vazio.hidden=n>0;
+  }
+
+  document.getElementById("busca").addEventListener("input",function(e){render(e.target.value)});
+  render("");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /app/
+Disallow: /video/
+Disallow: /como-usar.html
+Disallow: /seus-bonus.html
+Disallow: /metodo-cobra-certo.html
+Disallow: /upsell-oferta.html
+Allow: /
