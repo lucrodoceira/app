@@ -226,15 +226,15 @@
 (function(){
   "use strict";
   var $=function(id){return document.getElementById(id)};
-  var VKEY="calc_doceira_produtos";
 
+  // Cada link de entrega (um por e-mail de compra) e a fonte da verdade daquele
+  // momento: front sozinho, front+bump, ou tudo. Sem persistencia entre links,
+  // de proposito: se ela abrir um e-mail antigo, ve o que ELE diz, sem "lembranca"
+  // de compras feitas depois por outro link. Isso evita o link de front sozinho
+  // mostrar bump destravado so porque ela comprou o bump usando outro e-mail.
   function produtosComprados(){
     var qs=new URLSearchParams(location.search);
-    var deUrl=(qs.get("produtos")||"").split(",").map(function(s){return s.trim()}).filter(Boolean);
-    var salvo=[];try{salvo=JSON.parse(localStorage.getItem(VKEY)||"[]")}catch(e){}
-    var todos=Array.from(new Set(deUrl.concat(salvo)));
-    if(deUrl.length){try{localStorage.setItem(VKEY,JSON.stringify(todos))}catch(e){}}
-    return todos;
+    return (qs.get("produtos")||"").split(",").map(function(s){return s.trim()}).filter(Boolean);
   }
   var comprados=produtosComprados();
   var cards={bump:{el:$("ofBump"),cad:$("cadBump")},upsell:{el:$("ofUpsell"),cad:$("cadUpsell")}};
