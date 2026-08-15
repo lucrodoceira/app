@@ -74,8 +74,12 @@
     font-weight:800;cursor:pointer;background:var(--berry);color:#fff;box-shadow:0 6px 16px rgba(194,58,91,.28);
     text-decoration:none;white-space:nowrap;font-family:var(--body)}
   .oferta.done .rodape{display:none}
-  .oferta .ok-msg{display:none;font-size:13px;color:var(--ok);font-weight:800;align-items:center;gap:5px}
-  .oferta.done .ok-msg{display:flex}
+  .oferta .acessos{display:none;flex-direction:column;gap:8px;margin-top:2px}
+  .oferta.done .acessos{display:flex}
+  .oferta .acessos a{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #cdeadb;
+    border-radius:12px;padding:11px 13px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
+  .oferta .acessos a .ic{font-size:17px}
+  .oferta .acessos a small{display:block;color:var(--ink-soft);font-weight:600;font-size:12px;margin-top:1px}
   .cadeado{position:absolute;top:14px;right:14px;font-size:16px;opacity:.35}
   .oferta.done .cadeado{display:none}
 
@@ -169,8 +173,12 @@
     <div class="seta">→</div>
   </a>
 
+  <div class="tudo-liberado" id="tudoLiberado" style="display:none">
+    ✓ Você já tem tudo liberado. Aproveite! 🎉
+  </div>
+
   <div id="secaoOfertas">
-    <p class="titulo-secao">Mais resultado, sem esforço a mais</p>
+    <p class="titulo-secao" id="tituloSecao">Mais resultado, sem esforço a mais</p>
 
     <div class="oferta" id="ofBump" data-produto="bump" data-preco="27"
          data-checkout="https://pay.cakto.com.br/za77abr_1018310">
@@ -184,7 +192,10 @@
           <span class="preco">à vista <b>R$ 27</b></span>
           <button class="cta" data-comprar="bump">Destravar agora</button>
         </div>
-        <div class="ok-msg">✓ Destravado, é seu pra sempre</div>
+        <div class="acessos">
+          <a href="../insumos/"><span class="ic">🧁</span><span>Biblioteca de Insumos<small>36 ingredientes com o custo já calculado</small></span></a>
+          <a href="../etiquetas/"><span class="ic">🏷️</span><span>Gerador de Etiqueta<small>Etiqueta dentro das normas da ANVISA</small></span></a>
+        </div>
       </div>
     </div>
 
@@ -194,13 +205,15 @@
       <div class="cad" id="cadUpsell"></div>
       <div class="body">
         <span class="tag">Pra quando o cliente acha caro</span>
-        <p class="tit">Método Cobra Certo + Kits de Festa</p>
-        <p class="ben">O passo a passo pra sustentar seu preço sem perder cliente, e o módulo pronto pra precificar cento, mesa de doce e bolo de andar, sem chutar no pedido grande.</p>
+        <p class="tit">Método Cobra Certo</p>
+        <p class="ben">O passo a passo pra sustentar seu preço sem perder cliente, com os scripts prontos pra defender o valor na hora que o cliente acha caro.</p>
         <div class="rodape">
           <span class="preco">à vista <b>R$ 97</b></span>
           <button class="cta" data-comprar="upsell">Destravar agora</button>
         </div>
-        <div class="ok-msg">✓ Destravado, é seu pra sempre</div>
+        <div class="acessos">
+          <a href="../cobrar-mais/"><span class="ic">💎</span><span>Método Cobra Certo<small>Scripts pra defender seu preço sem perder cliente</small></span></a>
+        </div>
       </div>
     </div>
 
@@ -208,10 +221,6 @@
       <span class="txt">Levar os <b>2</b> agora: <b id="comboPreco">R$ 124</b></span>
       <button id="comboBtn">Destravar os 2</button>
     </div>
-  </div>
-
-  <div class="tudo-liberado" id="tudoLiberado" style="display:none">
-    ✓ Você já tem tudo liberado. Aproveite! 🎉
   </div>
 
   <div class="privacidade">
@@ -222,21 +231,19 @@
   <footer>Ficou com dúvida? Responde o e-mail que você recebeu da compra.</footer>
 </div>
 
+<script>window.PRODUTOS_COMPRADOS=["front"];</script>
 <script>
 (function(){
   "use strict";
   var $=function(id){return document.getElementById(id)};
 
-  // Cada link de entrega (um por e-mail de compra) e a fonte da verdade daquele
-  // momento: front sozinho, front+bump, ou tudo. Sem persistencia entre links,
-  // de proposito: se ela abrir um e-mail antigo, ve o que ELE diz, sem "lembranca"
-  // de compras feitas depois por outro link. Isso evita o link de front sozinho
-  // mostrar bump destravado so porque ela comprou o bump usando outro e-mail.
-  function produtosComprados(){
-    var qs=new URLSearchParams(location.search);
-    return (qs.get("produtos")||"").split(",").map(function(s){return s.trim()}).filter(Boolean);
-  }
-  var comprados=produtosComprados();
+  // Esta pagina e servida em 3 enderecos diferentes (como-usar/, seus-bonus/,
+  // metodo-cobra-certo/), um por produto, cada um com o proprio HTML.
+  // window.PRODUTOS_COMPRADOS e escrito no HTML de cada copia, ANTES deste
+  // script, dizendo o que aquele link especifico representa. Sem query string,
+  // sem localStorage: o endereco que a cliente recebeu por e-mail e a unica
+  // fonte da verdade daquele momento.
+  var comprados=window.PRODUTOS_COMPRADOS||["front"];
   var cards={bump:{el:$("ofBump"),cad:$("cadBump")},upsell:{el:$("ofUpsell"),cad:$("cadUpsell")}};
   var selecionados={};
 
@@ -249,7 +256,9 @@
       if(jaTem){c.cad.className="cad on";c.cad.textContent="✓";}
     });
     if(faltam.length===0){
-      $("secaoOfertas").style.display="none";
+      // tudo comprado: mantem os cards visiveis (com os links de acesso reais
+      // dentro de cada um), so troca o titulo da secao e mostra o reforco.
+      $("tituloSecao").textContent="Seus produtos";
       $("tudoLiberado").style.display="block";
     }
     atualizaCombo();
