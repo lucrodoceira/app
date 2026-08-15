@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Calculadora de Preço | Lucro Doceira</title>
+<title>Lucro Doceira | Meus produtos</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%8E%82%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="../img/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Calculadora">
+<meta name="apple-mobile-web-app-title" content="Lucro Doceira">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#c23a5b">
 <style>
@@ -23,94 +23,71 @@
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
     font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
-  .app{max-width:600px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:96px}
+  .app{max-width:600px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:28px}
 
   header{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
-    color:#fff;padding:20px 18px 16px;border-radius:0 0 22px 22px;box-shadow:var(--shadow)}
+    color:#fff;padding:24px 18px 20px;border-radius:0 0 22px 22px;box-shadow:var(--shadow)}
   header .brand{display:flex;align-items:center;gap:11px}
-  header .brand .logo{width:42px;height:42px;background:rgba(255,255,255,.2);border-radius:13px;
-    display:flex;align-items:center;justify-content:center;font-size:23px;flex:0 0 auto}
-  header h1{font-size:19px;margin:0;font-weight:800;letter-spacing:.2px}
-  header p{margin:2px 0 0;font-size:13px;opacity:.92}
+  header .brand .logo{width:46px;height:46px;background:rgba(255,255,255,.2);border-radius:14px;
+    display:flex;align-items:center;justify-content:center;font-size:25px;flex:0 0 auto}
+  header h1{font-size:20px;margin:0;font-weight:800;letter-spacing:.2px}
+  header p{margin:3px 0 0;font-size:13.5px;opacity:.92}
 
-  nav{display:flex;gap:6px;padding:12px 12px 0;position:sticky;top:0;z-index:5;background:var(--bg)}
-  nav button{flex:1;border:none;background:transparent;color:var(--muted);font-size:12px;
-    font-weight:700;padding:10px 2px;border-radius:12px;cursor:pointer;display:flex;
-    flex-direction:column;align-items:center;gap:3px;transition:.15s}
-  nav button .ic{font-size:18px}
-  nav button.on{background:var(--card);color:var(--accent);box-shadow:var(--shadow-sm)}
+  main{padding:16px 14px 14px}
+  .titulo-secao{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+    color:var(--muted);margin:18px 4px 9px;display:flex;align-items:center;gap:6px}
+  .titulo-secao:first-child{margin-top:2px}
 
-  main{padding:6px 14px 14px}
-  section[hidden]{display:none}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
-    padding:16px 14px;margin:12px 0;box-shadow:var(--shadow-sm)}
-  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.7px;color:var(--accent);
-    margin:0 0 4px;font-weight:800}
-  .card .desc{font-size:13px;color:var(--muted);margin:0 0 12px}
-  label{display:block;font-size:12.5px;color:var(--muted);margin:0 0 5px;font-weight:600;line-height:1.3}
-  input,select{width:100%;font-size:16px;padding:12px;border:1.5px solid var(--line);
-    border-radius:12px;background:#fff;color:var(--ink);outline:none;transition:.15s;height:46px}
-  select{padding:12px 8px;text-align:center;font-weight:700}
-  input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(210,79,110,.12)}
-  .row{display:flex;gap:9px;align-items:flex-end}
-  .row>div{flex:1;min-width:0}
-  .mt{margin-top:12px}
-  .hint{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+  /* card do FRONT (calculadora), sempre liberado */
+  .principal{display:flex;gap:13px;align-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;border-radius:18px;padding:18px 17px;box-shadow:var(--shadow);text-decoration:none;
+    margin-bottom:6px}
+  .principal .ic{flex:0 0 auto;width:52px;height:52px;background:rgba(255,255,255,.22);border-radius:15px;
+    display:flex;align-items:center;justify-content:center;font-size:26px}
+  .principal .tx{flex:1;min-width:0}
+  .principal .tx b{display:block;font-size:16.5px;font-weight:800;margin-bottom:2px}
+  .principal .tx span{font-size:13px;opacity:.92;display:block}
+  .principal .seta{flex:0 0 auto;font-size:22px;opacity:.85}
 
-  .ing,.oi{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:11px;
-    background:linear-gradient(180deg,#fffdfb,var(--soft))}
-  .ing .top,.oi .top{display:flex;gap:9px;align-items:flex-end}
-  .ing .top>div,.oi .top>div{flex:1;min-width:0}
-  .ing .sub,.oi .sub{display:flex;gap:9px;margin-top:9px;align-items:flex-end}
-  .ing .sub>div,.oi .sub>div{min-width:0}
-  .ing .sub>.qtd,.oi .sub>.qtd{flex:1}
-  .rescard{margin-top:10px;font-size:13px;color:var(--muted);text-align:right;
-    border-top:1px dashed var(--line);padding-top:8px}
-  .rescard b{color:var(--accent);font-size:15px}
-  .del{flex:0 0 auto;width:44px;height:46px;border:none;border-radius:12px;background:#f7ddd6;
-    color:var(--danger);font-size:22px;cursor:pointer}
-  .add{width:100%;padding:13px;border:1.5px dashed var(--accent);background:#fff;color:var(--accent);
-    border-radius:13px;font-size:14.5px;font-weight:800;cursor:pointer}
+  /* cards do bump/upsell */
+  .oferta{position:relative;border-radius:16px;padding:14px 14px 13px;box-shadow:var(--shadow-sm);
+    border:1.5px solid var(--line);background:linear-gradient(180deg,#fffdfb,var(--soft));
+    display:flex;gap:12px;align-items:flex-start;overflow:hidden;margin-bottom:10px}
+  .oferta.done{background:linear-gradient(180deg,#f3fbf6,#e9f7ee);border-color:#cdeadb}
+  .oferta .cad{flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:2px solid var(--line);
+    background:#fff;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:14px;color:#fff;font-weight:900;transition:.15s}
+  .oferta .cad.on{background:var(--accent);border-color:var(--accent)}
+  .oferta.done .cad{background:var(--ok);border-color:var(--ok)}
+  .oferta .body{flex:1;min-width:0}
+  .oferta .tag{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.5px;
+    text-transform:uppercase;color:var(--accent);background:#fff;border:1px solid var(--line);
+    padding:2px 8px;border-radius:999px;margin-bottom:5px}
+  .oferta.done .tag{color:var(--ok);border-color:#cdeadb;background:#fff}
+  .oferta .tit{font-weight:800;font-size:15px;color:var(--ink);margin:0 0 3px;line-height:1.25}
+  .oferta .ben{font-size:12.5px;color:#7a6a5f;margin:0 0 9px;line-height:1.5}
+  .oferta .rodape{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .oferta .preco{font-size:13px;color:var(--muted)}
+  .oferta .preco b{font-size:17px;color:var(--ink);font-weight:800}
+  .oferta .cta{flex:0 0 auto;border:none;border-radius:11px;padding:9px 14px;font-size:13px;
+    font-weight:800;cursor:pointer;background:var(--accent);color:#fff;box-shadow:0 5px 14px rgba(210,79,110,.28);
+    text-decoration:none;white-space:nowrap}
+  .oferta.done .rodape{display:none}
+  .oferta .ok-msg{display:none;font-size:12.5px;color:var(--ok);font-weight:800;align-items:center;gap:5px}
+  .oferta.done .ok-msg{display:flex}
+  .cadeado{position:absolute;top:12px;right:12px;font-size:15px;opacity:.35}
+  .oferta.done .cadeado{display:none}
 
-  .slider{display:flex;align-items:center;gap:12px}
-  .slider input[type=range]{flex:1;accent-color:var(--accent);height:30px;padding:0;border:none;box-shadow:none}
-  .mval{font-weight:800;color:var(--accent);min-width:56px;text-align:right;font-size:20px}
+  .combo{margin:2px 0 12px;padding:11px 13px;border-radius:13px;background:#fff;border:1.5px dashed var(--gold);
+    display:none;align-items:center;justify-content:space-between;gap:10px}
+  .combo.show{display:flex}
+  .combo .txt{font-size:12.5px;color:var(--ink)}
+  .combo .txt b{color:var(--accent)}
+  .combo button{flex:0 0 auto;border:none;border-radius:10px;padding:9px 13px;font-size:12.5px;
+    font-weight:800;background:var(--ink);color:#fff;cursor:pointer}
 
-  .hero{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
-    border-radius:18px;padding:22px 18px;text-align:center;box-shadow:var(--shadow)}
-  .hero .lbl{font-size:13px;opacity:.9;text-transform:uppercase;letter-spacing:.6px}
-  .hero .big{font-size:46px;font-weight:800;line-height:1.05;margin:4px 0}
-  .hero .big small{font-size:18px;font-weight:600;opacity:.9}
-  .hero .sub{font-size:13px;opacity:.92}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 13px;box-shadow:var(--shadow-sm)}
-  .stat span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
-  .stat b{font-size:19px;color:var(--ink)}
-  .stat.win b{color:var(--ok)}
-  .alertbox{margin-top:12px;background:var(--soft);border:1px solid var(--line);border-radius:12px;
-    padding:11px 13px;font-size:13px;color:var(--ink)}
-  .alertbox.warn{background:#fdeceb;border-color:#f3c9c4;color:var(--danger)}
-
-  .btn{display:block;width:100%;text-align:center;text-decoration:none;padding:15px;border-radius:13px;
-    font-size:16px;font-weight:800;border:none;cursor:pointer;margin-top:11px}
-  .btn-wa{background:#25d366;color:#fff;box-shadow:0 6px 16px rgba(37,211,102,.3)}
-  .btn-cp{background:var(--soft);color:var(--ink)}
-  .btn-add{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(210,79,110,.28)}
-  .preview{white-space:pre-wrap;background:#fff;border:1px dashed var(--line);border-radius:12px;
-    padding:12px;font-size:13.5px;color:var(--ink);margin-top:12px;line-height:1.55}
-  .totalbar{display:flex;justify-content:space-between;align-items:center;margin-top:6px;
-    padding:12px 14px;background:var(--soft);border-radius:13px}
-  .totalbar span{font-weight:700;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
-  .totalbar b{font-size:24px;color:var(--accent);font-weight:800}
-  .empty{text-align:center;color:var(--muted);font-size:13.5px;padding:14px 8px}
-
-  .pricebar{position:fixed;left:0;right:0;bottom:0;z-index:8;max-width:600px;margin:0 auto;
-    background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(150,100,80,.12);
-    display:flex;align-items:center;justify-content:space-between;padding:12px 18px;cursor:pointer}
-  .pricebar .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-  .pricebar .l b{display:block;font-size:13px;color:var(--ok);text-transform:none;letter-spacing:0;margin-top:2px}
-  .pricebar .r{font-size:30px;font-weight:800;color:var(--accent)}
-  .pricebar .r small{font-size:14px;font-weight:600;color:var(--muted)}
+  .tudo-liberado{text-align:center;padding:18px 16px;color:var(--ok);font-weight:800;font-size:13.5px;
+    background:#f3fbf6;border:1px solid #cdeadb;border-radius:14px;margin-bottom:10px}
 
   footer{text-align:center;color:var(--muted);font-size:11.5px;padding:16px 20px 8px;line-height:1.6}
 </style>
@@ -121,344 +98,146 @@
     <div class="brand">
       <div class="logo">🎂</div>
       <div>
-        <h1>Calculadora de Preço</h1>
-        <p>O preço certo, com o seu lucro, em 5 minutos</p>
+        <h1>Lucro Doceira</h1>
+        <p>Seus produtos, sempre à mão</p>
       </div>
     </div>
   </header>
 
-  <nav>
-    <button class="on" data-go="receita"><span class="ic">🧾</span>Receita</button>
-    <button data-go="custos"><span class="ic">⚙️</span>Custos</button>
-    <button data-go="preco"><span class="ic">💰</span>Preço</button>
-    <button data-go="orcamento"><span class="ic">📲</span>Orçamento</button>
-  </nav>
-
   <main>
-    <!-- RECEITA -->
-    <section data-tab="receita">
-      <div class="card">
-        <h2>Qual doce você está calculando?</h2>
-        <input id="nomeDoce" placeholder="Ex: Brigadeiro gourmet" autocomplete="off">
+    <p class="titulo-secao">Sua ferramenta</p>
+    <a class="principal" href="ferramenta/">
+      <div class="ic">🧾</div>
+      <div class="tx">
+        <b>Calculadora de Preço</b>
+        <span>Receita, custos, preço e orçamento</span>
       </div>
-      <div class="card">
-        <h2>Ingredientes da receita</h2>
-        <p class="desc">Coloque quanto você pagou na embalagem e quanto usou. A conta é automática.</p>
-        <div id="ings"></div>
-        <button class="add" id="addIng">+ Adicionar ingrediente</button>
-      </div>
-      <button class="btn btn-cp" data-next="custos">Próximo: Custos →</button>
-    </section>
+      <div class="seta">→</div>
+    </a>
 
-    <!-- CUSTOS -->
-    <section data-tab="custos" hidden>
-      <div class="card">
-        <h2>O seu tempo</h2>
-        <p class="desc">O erro nº1 é não cobrar o próprio trabalho. Aqui a gente conserta isso.</p>
-        <div class="row">
-          <div><label>Quanto vale a sua hora? (R$)</label><input id="valorHora" type="number" inputmode="decimal" placeholder="Ex: 20"></div>
-          <div><label>Tempo da receita (min)</label><input id="tempo" type="number" inputmode="numeric" placeholder="Ex: 90"></div>
-        </div>
-        <p class="hint">Não sabe quanto vale a sua hora? Comece com R$ 15 a R$ 25. O seu tempo custa.</p>
-      </div>
-      <div class="card">
-        <h2>Custos que quase todo mundo esquece</h2>
-        <div class="row">
-          <div><label>Embalagem (R$)</label><input id="embalagem" type="number" inputmode="decimal" placeholder="Ex: 8"></div>
-          <div><label>Gás, energia e etc. (R$)</label><input id="extras" type="number" inputmode="decimal" placeholder="Ex: 5"></div>
-        </div>
-        <div class="row mt">
-          <div><label>Rende quantas unidades? <b style="color:var(--danger)">*</b></label><input id="rende" type="number" inputmode="numeric" placeholder="Ex: 30"></div>
-        </div>
-        <p class="hint">Conte por unidade que você VENDE: ex. 30 brigadeiros, ou 12 fatias de bolo.</p>
-      </div>
-      <div class="card">
-        <h2>Quanto você quer ganhar?</h2>
-        <div class="slider">
-          <input id="margem" type="range" min="0" max="200" value="100">
-          <span class="mval" id="margemVal">100%</span>
-        </div>
-        <p class="hint" id="markupHint">Você ganha em cima do custo. Confeitaria costuma usar de 100% a 200%.</p>
-        <div class="alertbox" id="alertaCustos" style="margin-top:12px"></div>
-        <button class="btn btn-cp" data-next="preco" style="margin-top:14px">Ver meu preço →</button>
-      </div>
-    </section>
+    <div id="secaoOfertas">
+      <p class="titulo-secao">Mais resultado, sem esforço a mais</p>
 
-    <!-- PRECO -->
-    <section data-tab="preco" hidden>
-      <div class="hero">
-        <div class="lbl">Preço de venda por unidade</div>
-        <div class="big" id="precoUn">R$ 0,00 <small>/un</small></div>
-        <div class="sub">é esse o preço que dá o seu lucro</div>
+      <div class="oferta" id="ofBump" data-produto="bump" data-preco="27"
+           data-checkout="https://pay.cakto.com.br/za77abr_1018310">
+        <span class="cadeado">🔒</span>
+        <div class="cad" id="cadBump"></div>
+        <div class="body">
+          <span class="tag">Pare de digitar preço na mão</span>
+          <p class="tit">Banco de 36 insumos + Gerador de Etiqueta</p>
+          <p class="ben">36 ingredientes mais usados já com o custo calculado, você só escolhe. E a etiqueta dentro das normas da ANVISA pronta em segundos, sem precisar saber nada de lei.</p>
+          <div class="rodape">
+            <span class="preco">à vista <b>R$ 27</b></span>
+            <button class="cta" data-comprar="bump">Destravar agora</button>
+          </div>
+          <div class="ok-msg">✓ Destravado, é seu pra sempre</div>
+        </div>
       </div>
-      <div class="grid2">
-        <div class="stat win"><span>Seu lucro por unidade</span><b id="lucroUn">R$ 0,00</b></div>
-        <div class="stat"><span>Custo por unidade</span><b id="custoUn">R$ 0,00</b></div>
-        <div class="stat"><span>Custo total da receita</span><b id="custoTot">R$ 0,00</b></div>
-        <div class="stat"><span>Preço do cento</span><b id="precoCento">R$ 0,00</b></div>
-      </div>
-      <div class="alertbox" id="alerta">Preencha a receita e os custos pra ver o seu preço.</div>
-      <div class="card">
-        <button class="btn btn-add" id="addOrc">➕ Adicionar este doce ao orçamento</button>
-        <p class="hint">Calcule vários doces e monte um orçamento completo: kit, salgados, bolo, o que precisar.</p>
-      </div>
-    </section>
 
-    <!-- ORCAMENTO -->
-    <section data-tab="orcamento" hidden>
-      <div class="card">
-        <h2>Seus dados e o cliente</h2>
-        <div class="row">
-          <div><label>Nome da sua doceria</label><input id="doceria" placeholder="Ex: Doces da Ana" autocomplete="off"></div>
+      <div class="oferta" id="ofUpsell" data-produto="upsell" data-preco="97"
+           data-checkout="https://pay.cakto.com.br/3cw9bu4_1018317">
+        <span class="cadeado">🔒</span>
+        <div class="cad" id="cadUpsell"></div>
+        <div class="body">
+          <span class="tag">Pra quando o cliente acha caro</span>
+          <p class="tit">Método Cobra Certo + Kits de Festa</p>
+          <p class="ben">O passo a passo pra sustentar seu preço sem perder cliente, e o módulo pronto pra precificar cento, mesa de doce e bolo de andar, sem chutar no pedido grande.</p>
+          <div class="rodape">
+            <span class="preco">à vista <b>R$ 97</b></span>
+            <button class="cta" data-comprar="upsell">Destravar agora</button>
+          </div>
+          <div class="ok-msg">✓ Destravado, é seu pra sempre</div>
         </div>
-        <div class="row mt">
-          <div><label>Nome do cliente</label><input id="cliente" placeholder="Ex: Maria" autocomplete="off"></div>
-          <div><label>WhatsApp dele (opcional)</label><input id="zap" inputmode="tel" placeholder="11999998888"></div>
-        </div>
       </div>
-      <div class="card">
-        <h2>Itens do orçamento</h2>
-        <p class="desc">Adicione quantos doces quiser. Use o botão da aba Preço pra trazer o valor calculado.</p>
-        <div id="orcItems"></div>
-        <button class="add" id="addItem">+ Adicionar item</button>
-        <div class="totalbar"><span>Total do orçamento</span><b id="orcTotal">R$ 0,00</b></div>
+
+      <div class="combo" id="combo">
+        <span class="txt">Levar os <b>2</b> agora: <b id="comboPreco">R$ 124</b></span>
+        <button id="comboBtn">Destravar os 2</button>
       </div>
-      <div class="card">
-        <a class="btn btn-wa" id="btnWa" href="#">📲 Enviar no WhatsApp</a>
-        <button class="btn btn-cp" id="btnCp">Copiar orçamento</button>
-        <div class="preview" id="orcPreview"></div>
-      </div>
-    </section>
+    </div>
+
+    <div class="tudo-liberado" id="tudoLiberado" style="display:none">
+      ✓ Você já tem tudo liberado. Aproveite! 🎉
+    </div>
 
     <footer>
-      Seus dados ficam salvos só neste aparelho. Nada é enviado pra internet.<br>
-      Calculadora de Preço
+      Seus dados ficam salvos só neste aparelho. Nada é enviado pra internet.
     </footer>
   </main>
-
-  <div class="pricebar" id="pricebar">
-    <div class="l">Preço por unidade<b id="barLucro">lucro R$ 0,00</b></div>
-    <div class="r" id="barPreco">R$ 0,00 <small>/un</small></div>
-  </div>
 </div>
 
 <script>
 (function(){
   "use strict";
-  var KEY="calc_doceira_v3";
   var $=function(id){return document.getElementById(id)};
-  var ingsEl=$("ings"), orcEl=$("orcItems");
-  var precoAtual=0;
+  var VKEY="calc_doceira_produtos";
 
-  /* ---------- abas ---------- */
-  var tabBtns=[].slice.call(document.querySelectorAll("nav button"));
-  var sections=[].slice.call(document.querySelectorAll("section[data-tab]"));
-  function go(name){
-    sections.forEach(function(s){s.hidden=s.getAttribute("data-tab")!==name});
-    tabBtns.forEach(function(b){b.classList.toggle("on",b.getAttribute("data-go")===name)});
-    window.scrollTo(0,0);
+  function produtosComprados(){
+    var qs=new URLSearchParams(location.search);
+    var deUrl=(qs.get("produtos")||"").split(",").map(function(s){return s.trim()}).filter(Boolean);
+    var salvo=[];try{salvo=JSON.parse(localStorage.getItem(VKEY)||"[]")}catch(e){}
+    var todos=Array.from(new Set(deUrl.concat(salvo)));
+    // o link novo de entrega sempre manda a verdade mais recente; persiste pra próxima visita
+    if(deUrl.length){try{localStorage.setItem(VKEY,JSON.stringify(todos))}catch(e){}}
+    return todos;
   }
-  tabBtns.forEach(function(b){b.addEventListener("click",function(){go(b.getAttribute("data-go"))})});
-  [].slice.call(document.querySelectorAll("[data-next]")).forEach(function(b){b.addEventListener("click",function(){go(b.getAttribute("data-next"))})});
-  $("pricebar").addEventListener("click",function(){go("preco")});
+  var comprados=produtosComprados();
+  var cards={bump:{el:$("ofBump"),cad:$("cadBump")},upsell:{el:$("ofUpsell"),cad:$("cadUpsell")}};
+  var selecionados={};
 
-  /* ---------- helpers ---------- */
-  function baseUnit(qty,unit){
-    qty=parseFloat(qty)||0;
-    if(unit==="kg")return{v:qty*1000,dim:"peso"};
-    if(unit==="g") return{v:qty,dim:"peso"};
-    if(unit==="L") return{v:qty*1000,dim:"vol"};
-    if(unit==="ml")return{v:qty,dim:"vol"};
-    return{v:qty,dim:"un"};
-  }
-  function brl(n){if(!isFinite(n))n=0;
-    return "R$ "+n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});}
-  function unitOptions(sel){return ["kg","g","L","ml","un"].map(function(u){
-    return '<option'+(u===sel?' selected':'')+'>'+u+'</option>';}).join("");}
-
-  /* ---------- ingredientes ---------- */
-  function ingRow(data){
-    data=data||{};
-    var d=document.createElement("div");d.className="ing";
-    d.innerHTML=
-      '<div class="top">'+
-        '<div><label>Ingrediente</label><input class="i-nome" placeholder="Ex: Leite condensado" value="'+(data.nome||"")+'"></div>'+
-        '<button class="del" title="remover">×</button></div>'+
-      '<div class="sub">'+
-        '<div class="qtd"><label>Quanto você pagou? (R$)</label><input class="i-preco" type="number" inputmode="decimal" value="'+(data.preco||"")+'"></div></div>'+
-      '<div class="sub">'+
-        '<div class="qtd"><label>Quanto vem no pacote?</label><input class="i-qc" type="number" inputmode="decimal" value="'+(data.qc||"")+'"></div>'+
-        '<div style="flex:0 0 96px"><label>medida</label><select class="i-uc">'+unitOptions(data.uc||"g")+'</select></div></div>'+
-      '<div class="sub">'+
-        '<div class="qtd"><label>Quanto usou na receita?</label><input class="i-qu" type="number" inputmode="decimal" value="'+(data.qu||"")+'"></div>'+
-        '<div style="flex:0 0 96px"><label>medida</label><select class="i-uu">'+unitOptions(data.uu||"g")+'</select></div></div>'+
-      '<div class="rescard">Custo na receita: <b class="i-out">R$ 0,00</b></div>';
-    d.querySelector(".del").addEventListener("click",function(){d.remove();recalc();});
-    var uc=d.querySelector(".i-uc"),uu=d.querySelector(".i-uu");
-    uc.addEventListener("change",function(){uu.value=uc.value;});
-    d.addEventListener("input",recalc);d.addEventListener("change",recalc);
-    ingsEl.appendChild(d);return d;
-  }
-  function ingCost(d){
-    var preco=parseFloat(d.querySelector(".i-preco").value)||0;
-    var comp=baseUnit(d.querySelector(".i-qc").value,d.querySelector(".i-uc").value);
-    var uso =baseUnit(d.querySelector(".i-qu").value,d.querySelector(".i-uu").value);
-    if(preco<=0)return{c:0,tipo:"vazio"};
-    if(comp.v<=0)return{c:0,tipo:"falta-pacote"};
-    if(comp.dim!==uso.dim)return{c:0,tipo:"erro-medida"};
-    if(uso.v<=0)return{c:0,tipo:"falta-uso"};
-    return{c:preco*(uso.v/comp.v),tipo:"ok"};
-  }
-
-  function recalc(){
-    var custoIng=0,algumErro=false;
-    ingsEl.querySelectorAll(".ing").forEach(function(d){
-      var r=ingCost(d);algumErro=algumErro||(r.tipo==="erro-medida");
-      var out;
-      if(r.tipo==="erro-medida")out='<span style="color:var(--danger)">confira a medida</span>';
-      else if(r.tipo==="falta-pacote")out='<span style="color:var(--gold)">falta "quanto vem no pacote"</span>';
-      else if(r.tipo==="falta-uso")out='<span style="color:var(--gold)">falta "quanto usou na receita"</span>';
-      else out=brl(r.c);
-      d.querySelector(".i-out").innerHTML=out;
-      custoIng+=r.c;
+  function aplicaEstado(){
+    var faltam=Object.keys(cards).filter(function(k){return comprados.indexOf(k)===-1});
+    Object.keys(cards).forEach(function(k){
+      var c=cards[k];
+      var jaTem=comprados.indexOf(k)>-1;
+      c.el.classList.toggle("done",jaTem);
+      if(jaTem){c.cad.className="cad on";c.cad.textContent="✓";}
     });
-    var valorHora=parseFloat($("valorHora").value)||0;
-    var tempo=parseFloat($("tempo").value)||0;
-    var maoObra=(tempo/60)*valorHora;
-    var embalagem=parseFloat($("embalagem").value)||0;
-    var extras=parseFloat($("extras").value)||0;
-    var rende=parseFloat($("rende").value)||0;
-    var margem=parseFloat($("margem").value)||0;
-    $("margemVal").textContent=margem+"%";
-
-    var custoTot=custoIng+maoObra+embalagem+extras;
-    var custoUn=rende>0?custoTot/rende:0;
-    var precoUn=custoUn*(1+margem/100);
-    var lucroUn=precoUn-custoUn;
-    precoAtual=precoUn;
-    var mult=1+margem/100;
-    var mh=$("markupHint");
-    if(mh)mh.innerHTML="Você ganha <b>"+margem+"%</b> em cima do custo: vende por <b>"+mult.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1})+"×</b> o custo. Confeitaria costuma usar de 100% a 200%.";
-
-    $("custoTot").textContent=brl(custoTot);
-    $("custoUn").textContent=brl(custoUn);
-    $("precoUn").innerHTML=brl(precoUn)+' <small>/un</small>';
-    $("lucroUn").textContent=brl(lucroUn);
-    $("precoCento").textContent=brl(precoUn*100);
-    $("barPreco").innerHTML=brl(precoUn)+' <small>/un</small>';
-    $("barLucro").textContent="lucro "+brl(lucroUn);
-
-    var al=$("alerta"),alC=$("alertaCustos");
-    var cls="alertbox",msg;
-    if(algumErro){cls="alertbox warn";msg="⚠ Um ingrediente está com medidas que não combinam (ex: comprou em kg e usou em ml). Confira na aba Receita.";}
-    else if(rende<=0){cls="alertbox warn";msg="⚠ Falta preencher \"Rende quantas unidades?\" aqui em cima. Sem isso o preço fica R$ 0,00.";}
-    else if(valorHora<=0||tempo<=0){msg="💡 Você ainda não cobrou o seu tempo. Preencha a hora e os minutos ali em cima pra não trabalhar de graça.";}
-    else{msg="✓ Preço calculado com ingredientes, seu tempo e os custos escondidos.";}
-    if(al){al.className=cls;al.textContent=msg;}
-    if(alC){alC.className=cls;alC.textContent=msg;}
-    save();
-  }
-
-  /* ---------- orcamento (varios itens) ---------- */
-  function orcRow(item){
-    item=item||{};
-    var d=document.createElement("div");d.className="oi";
-    d.innerHTML=
-      '<div class="top">'+
-        '<div><label>Item</label><input class="o-desc" placeholder="Ex: Brigadeiro gourmet" value="'+(item.desc||"").replace(/"/g,"&quot;")+'"></div>'+
-        '<button class="del" title="remover">×</button></div>'+
-      '<div class="sub">'+
-        '<div class="qtd"><label>Quantidade</label><input class="o-qtd" type="number" inputmode="numeric" value="'+(item.qty!=null?item.qty:"")+'"></div>'+
-        '<div class="qtd"><label>Preço por unidade (R$)</label><input class="o-preco" type="number" inputmode="decimal" value="'+(item.preco!=null?item.preco:"")+'"></div></div>'+
-      '<div class="rescard">Subtotal: <b class="o-sub">R$ 0,00</b></div>';
-    d.querySelector(".del").addEventListener("click",function(){d.remove();recalcOrc();});
-    d.addEventListener("input",recalcOrc);
-    orcEl.appendChild(d);return d;
-  }
-  function recalcOrc(){
-    var total=0, itens=orcEl.querySelectorAll(".oi");
-    itens.forEach(function(d){
-      var q=parseFloat(d.querySelector(".o-qtd").value)||0;
-      var p=parseFloat(d.querySelector(".o-preco").value)||0;
-      var sub=q*p; total+=sub;
-      d.querySelector(".o-sub").textContent=brl(sub);
-    });
-    $("orcTotal").textContent=brl(total);
-    updateMsg(total);save();
-  }
-  function updateMsg(total){
-    var doceria=$("doceria").value.trim(),cliente=$("cliente").value.trim();
-    var L=[];
-    L.push(doceria?("*"+doceria+"*"):"*Orçamento*");L.push("");
-    L.push(cliente?("Oi, "+cliente+"! Segue seu orçamento 💛"):"Segue seu orçamento 💛");L.push("");
-    var algum=false;
-    orcEl.querySelectorAll(".oi").forEach(function(d){
-      var desc=d.querySelector(".o-desc").value.trim()||"Item";
-      var q=parseFloat(d.querySelector(".o-qtd").value)||0;
-      var p=parseFloat(d.querySelector(".o-preco").value)||0;
-      if(q>0||p>0){algum=true;
-        L.push("• "+(q>0?(q+"x "):"")+desc+": "+brl(q*p)+(q>0?(" ("+brl(p)+" cada)"):""));}
-    });
-    if(algum){L.push("");L.push("*Total: "+brl(total)+"*");}
-    L.push("");L.push("Qualquer dúvida é só chamar!");
-    var txt=L.join("\n");
-    var zap=($("zap").value||"").replace(/\D/g,"");
-    $("btnWa").setAttribute("href","https://wa.me/"+(zap?("55"+zap):"")+"?text="+encodeURIComponent(txt));
-    if(orcEl.querySelectorAll(".oi").length===0){
-      $("orcPreview").innerHTML='<span class="empty">Nenhum item ainda. Calcule um doce na aba Preço e toque em “Adicionar ao orçamento”, ou toque em “Adicionar item na mão”.</span>';
-    }else{
-      $("orcPreview").textContent=txt;
+    if(faltam.length===0){
+      $("secaoOfertas").style.display="none";
+      $("tudoLiberado").style.display="block";
     }
-    window.__orc=txt;
+    atualizaCombo();
   }
-
-  /* ---------- persistencia ---------- */
-  function save(){try{
-    var ings=[];ingsEl.querySelectorAll(".ing").forEach(function(d){ings.push({
-      nome:d.querySelector(".i-nome").value,preco:d.querySelector(".i-preco").value,
-      qc:d.querySelector(".i-qc").value,uc:d.querySelector(".i-uc").value,
-      qu:d.querySelector(".i-qu").value,uu:d.querySelector(".i-uu").value});});
-    var itens=[];orcEl.querySelectorAll(".oi").forEach(function(d){itens.push({
-      desc:d.querySelector(".o-desc").value,qty:d.querySelector(".o-qtd").value,preco:d.querySelector(".o-preco").value});});
-    localStorage.setItem(KEY,JSON.stringify({
-      nomeDoce:$("nomeDoce").value,doceria:$("doceria").value,cliente:$("cliente").value,zap:$("zap").value,
-      valorHora:$("valorHora").value,tempo:$("tempo").value,embalagem:$("embalagem").value,
-      extras:$("extras").value,rende:$("rende").value,margem:$("margem").value,ings:ings,itens:itens}));
-  }catch(e){}}
-  function load(){
-    var st=null;try{st=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
-    if(st){["nomeDoce","doceria","cliente","zap","valorHora","tempo","embalagem","extras","rende","margem"].forEach(function(k){
-      if(st[k]!=null&&$(k))$(k).value=st[k];});
-      (st.ings&&st.ings.length?st.ings:[{uc:"g",uu:"g"},{uc:"g",uu:"g"}]).forEach(ingRow);
-      (st.itens||[]).forEach(orcRow);
-    }else{ingRow({uc:"g",uu:"g"});ingRow({uc:"g",uu:"g"});}
+  function atualizaCombo(){
+    var faltam=Object.keys(cards).filter(function(k){return comprados.indexOf(k)===-1;});
+    var marcados=faltam.filter(function(k){return selecionados[k]});
+    var combo=$("combo");
+    if(marcados.length>=2){
+      var total=marcados.reduce(function(s,k){return s+parseFloat(cards[k].el.getAttribute("data-preco"));},0);
+      $("comboPreco").textContent="R$ "+total.toLocaleString("pt-BR");
+      combo.classList.add("show");
+    }else{
+      combo.classList.remove("show");
+    }
   }
-
-  /* ---------- eventos ---------- */
-  $("addIng").addEventListener("click",function(){ingRow({uc:"g",uu:"g"});recalc();});
-  $("addItem").addEventListener("click",function(){orcRow({qty:1});recalcOrc();});
-  $("addOrc").addEventListener("click",function(){
-    var nome=$("nomeDoce").value.trim()||"Doce";
-    orcRow({desc:nome,qty:1,preco:(Math.round(precoAtual*100)/100)});
-    recalcOrc();go("orcamento");
-  });
-  $("btnCp").addEventListener("click",function(){
-    var t=window.__orc||"";
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(t).then(function(){flash($("btnCp"),"Copiado! ✓")});
-    }else{var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);
-      ta.select();try{document.execCommand("copy")}catch(e){}ta.remove();flash($("btnCp"),"Copiado! ✓");}
-  });
-  function flash(el,m){var o=el.textContent;el.textContent=m;setTimeout(function(){el.textContent=o},1500);}
-  document.addEventListener("input",function(e){
-    if(!e.target.closest)return;
-    if(e.target.closest(".ing"))return;
-    if(e.target.closest(".oi")){return;}
-    if(e.target.closest('section[data-tab="orcamento"]')){recalcOrc();return;}
-    if(e.target.closest("section"))recalc();
+  function toggleSelecao(k){
+    if(comprados.indexOf(k)>-1)return;
+    selecionados[k]=!selecionados[k];
+    cards[k].cad.className="cad"+(selecionados[k]?" on":"");
+    if(selecionados[k])cards[k].cad.textContent="✓";
+    atualizaCombo();
+  }
+  Object.keys(cards).forEach(function(k){
+    cards[k].cad.addEventListener("click",function(){toggleSelecao(k)});
   });
 
-  load();recalc();recalcOrc();
+  function irPraCheckout(k){
+    var url=cards[k].el.getAttribute("data-checkout");
+    var qs=location.search?location.search.slice(1):"";
+    window.open(qs?(url+(url.indexOf("?")>-1?"&":"?")+qs):url,"_blank");
+  }
+  [].slice.call(document.querySelectorAll("[data-comprar]")).forEach(function(b){
+    b.addEventListener("click",function(){irPraCheckout(b.getAttribute("data-comprar"))});
+  });
+  $("comboBtn").addEventListener("click",function(){
+    // a Cakto nao tem carrinho de 2 produtos avulsos num link so: abre o bump primeiro
+    // (mais barato, resolve mais rapido) e o upsell na sequencia, cada um em nova aba.
+    var faltam=Object.keys(cards).filter(function(k){return comprados.indexOf(k)===-1 && selecionados[k]});
+    faltam.forEach(function(k,i){setTimeout(function(){irPraCheckout(k)},i*450);});
+  });
+
+  aplicaEstado();
 })();
 </script>
 </body>
