@@ -54,17 +54,15 @@
   .oferta{position:relative;border-radius:18px;padding:16px 17px 15px;box-shadow:var(--shadow-sm);
     border:1.5px solid var(--line);background:linear-gradient(180deg,#fffdfb,var(--soft));
     display:flex;gap:13px;align-items:flex-start;overflow:hidden;margin-bottom:12px}
-  .oferta.done{background:linear-gradient(180deg,#f3fbf6,#e9f7ee);border-color:#cdeadb}
   .oferta .cad{flex:0 0 auto;width:23px;height:23px;border-radius:7px;border:2px solid var(--line);
     background:#fff;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;
     font-size:14px;color:#fff;font-weight:900;transition:.15s}
   .oferta .cad.on{background:var(--berry);border-color:var(--berry)}
-  .oferta.done .cad{background:var(--ok);border-color:var(--ok)}
+  .oferta.done .cad{display:none}
   .oferta .body{flex:1;min-width:0}
   .oferta .tag{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.5px;
     text-transform:uppercase;color:var(--berry);background:#fff;border:1px solid var(--line);
     padding:3px 9px;border-radius:999px;margin-bottom:6px}
-  .oferta.done .tag{color:var(--ok);border-color:#cdeadb;background:#fff}
   .oferta .tit{font-family:var(--disp);font-weight:700;font-size:16.5px;color:var(--ink);margin:0 0 4px;line-height:1.25}
   .oferta .ben{font-size:13.5px;color:#7a6a5f;margin:0 0 11px;line-height:1.55}
   .oferta .rodape{display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -76,7 +74,7 @@
   .oferta.done .rodape{display:none}
   .oferta .acessos{display:none;flex-direction:column;gap:8px;margin-top:2px}
   .oferta.done .acessos{display:flex}
-  .oferta .acessos a{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #cdeadb;
+  .oferta .acessos a{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);
     border-radius:12px;padding:11px 13px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
   .oferta .acessos a .ic{font-size:17px}
   .oferta .acessos a small{display:block;color:var(--ink-soft);font-weight:600;font-size:12px;margin-top:1px}
@@ -90,9 +88,6 @@
   .combo .txt b{color:var(--berry)}
   .combo button{flex:0 0 auto;border:none;border-radius:11px;padding:10px 15px;font-size:13.5px;
     font-weight:800;background:var(--ink);color:#fff;cursor:pointer;font-family:var(--body)}
-
-  .tudo-liberado{text-align:center;padding:20px 18px;color:var(--ok);font-weight:800;font-size:14.5px;
-    background:#f3fbf6;border:1px solid #cdeadb;border-radius:16px;margin-bottom:14px}
 
   /* accordion de instalacao */
   .acc{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:18px 0}
@@ -173,10 +168,6 @@
     <div class="seta">→</div>
   </a>
 
-  <div class="tudo-liberado" id="tudoLiberado" style="display:none">
-    ✓ Você já tem tudo liberado. Aproveite! 🎉
-  </div>
-
   <div id="secaoOfertas">
     <p class="titulo-secao" id="tituloSecao">Mais resultado, sem esforço a mais</p>
 
@@ -253,13 +244,11 @@
       var c=cards[k];
       var jaTem=comprados.indexOf(k)>-1;
       c.el.classList.toggle("done",jaTem);
-      if(jaTem){c.cad.className="cad on";c.cad.textContent="✓";}
     });
     if(faltam.length===0){
       // tudo comprado: mantem os cards visiveis (com os links de acesso reais
-      // dentro de cada um), so troca o titulo da secao e mostra o reforco.
+      // dentro de cada um), so troca o titulo da secao.
       $("tituloSecao").textContent="Seus produtos";
-      $("tudoLiberado").style.display="block";
     }
     atualizaCombo();
   }
