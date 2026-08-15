@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Seus bônus: Biblioteca de Insumos + Etiqueta</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%A7%81%3C/text%3E%3C/svg%3E">
+<title>Lucro Doceira | Seu bônus liberado</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%8E%82%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="../img/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lucro Doceira">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#c23a5b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,45 +18,289 @@
 <style>
   :root{
     --paper:#f6efe4; --card:#fffdf9; --ink:#3a2a22; --ink-soft:#8a7869; --line:#e8ddcb;
-    --berry:#c23a5b; --caramel:#dd9455; --cream:#fbf5ea;
-    --shadow:0 12px 30px rgba(120,70,50,.12);
+    --berry:#c23a5b; --berry2:#dd9455; --caramel:#dd9455; --cream:#fbf5ea; --ok:#2f9e6f;
+    --gold:#c9a24a; --soft:#fbeee6;
+    --shadow:0 12px 30px rgba(120,70,50,.12); --shadow-sm:0 4px 14px rgba(120,70,50,.10);
     --disp:"Fraunces",Georgia,serif; --body:"Nunito",system-ui,sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
     font-size:17px;line-height:1.6;padding:0 0 50px}
   .wrap{max-width:600px;margin:0 auto;padding:0 20px}
-  h1{font-family:var(--disp);font-weight:800;line-height:1.15;margin:0}
+  h1,h2{font-family:var(--disp);font-weight:800;line-height:1.15;margin:0}
   header{padding:34px 0 18px;text-align:center}
   .logo{font-size:15px;font-weight:800;color:var(--berry);text-transform:uppercase;letter-spacing:1px}
-  h1{font-size:clamp(24px,6vw,30px);margin:10px 0 8px}
+  h1{font-size:clamp(26px,6vw,34px);margin:10px 0 8px}
   .sub{color:var(--ink-soft);font-size:16px;margin:0}
+
   .card{background:var(--card);border:1px solid var(--line);border-radius:20px;
     padding:22px 20px;box-shadow:var(--shadow);margin:18px 0}
-  .links{display:flex;flex-direction:column;gap:10px}
-  .links a{display:flex;align-items:center;gap:11px;background:var(--cream);border:1px solid var(--line);
-    border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:700;font-size:15px}
-  .links a .ic{font-size:20px}
-  .links a small{display:block;color:var(--ink-soft);font-weight:600;font-size:13px;margin-top:1px}
-  .dica{background:var(--cream);border-radius:14px;padding:14px 16px;font-size:14px;color:var(--ink-soft)}
+  h2{font-size:21px;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+
+  /* botao principal: abrir a calculadora */
+  .abrir{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,var(--berry),var(--berry2));
+    color:#fff;border-radius:20px;padding:20px 20px;box-shadow:var(--shadow);text-decoration:none;
+    margin:8px 0 18px}
+  .abrir .ic{flex:0 0 auto;width:54px;height:54px;background:rgba(255,255,255,.22);border-radius:16px;
+    display:flex;align-items:center;justify-content:center;font-size:27px}
+  .abrir .tx{flex:1;min-width:0}
+  .abrir .tx b{display:block;font-size:18px;font-weight:800;margin-bottom:2px}
+  .abrir .tx span{font-size:13.5px;opacity:.92;display:block}
+  .abrir .seta{flex:0 0 auto;font-size:24px;opacity:.9}
+
+  /* cards de bump/upsell */
+  .titulo-secao{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+    color:var(--ink-soft);margin:6px 2px 10px}
+  .oferta{position:relative;border-radius:18px;padding:16px 17px 15px;box-shadow:var(--shadow-sm);
+    border:1.5px solid var(--line);background:linear-gradient(180deg,#fffdfb,var(--soft));
+    display:flex;gap:13px;align-items:flex-start;overflow:hidden;margin-bottom:12px}
+  .oferta.done{background:linear-gradient(180deg,#f3fbf6,#e9f7ee);border-color:#cdeadb}
+  .oferta .cad{flex:0 0 auto;width:23px;height:23px;border-radius:7px;border:2px solid var(--line);
+    background:#fff;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:14px;color:#fff;font-weight:900;transition:.15s}
+  .oferta .cad.on{background:var(--berry);border-color:var(--berry)}
+  .oferta.done .cad{background:var(--ok);border-color:var(--ok)}
+  .oferta .body{flex:1;min-width:0}
+  .oferta .tag{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.5px;
+    text-transform:uppercase;color:var(--berry);background:#fff;border:1px solid var(--line);
+    padding:3px 9px;border-radius:999px;margin-bottom:6px}
+  .oferta.done .tag{color:var(--ok);border-color:#cdeadb;background:#fff}
+  .oferta .tit{font-family:var(--disp);font-weight:700;font-size:16.5px;color:var(--ink);margin:0 0 4px;line-height:1.25}
+  .oferta .ben{font-size:13.5px;color:#7a6a5f;margin:0 0 11px;line-height:1.55}
+  .oferta .rodape{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .oferta .preco{font-size:13.5px;color:var(--ink-soft)}
+  .oferta .preco b{font-size:18px;color:var(--ink);font-weight:800;font-family:var(--disp)}
+  .oferta .cta{flex:0 0 auto;border:none;border-radius:12px;padding:10px 16px;font-size:14px;
+    font-weight:800;cursor:pointer;background:var(--berry);color:#fff;box-shadow:0 6px 16px rgba(194,58,91,.28);
+    text-decoration:none;white-space:nowrap;font-family:var(--body)}
+  .oferta.done .rodape{display:none}
+  .oferta .acessos{display:none;flex-direction:column;gap:8px;margin-top:2px}
+  .oferta.done .acessos{display:flex}
+  .oferta .acessos a{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #cdeadb;
+    border-radius:12px;padding:11px 13px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
+  .oferta .acessos a .ic{font-size:17px}
+  .oferta .acessos a small{display:block;color:var(--ink-soft);font-weight:600;font-size:12px;margin-top:1px}
+  .cadeado{position:absolute;top:14px;right:14px;font-size:16px;opacity:.35}
+  .oferta.done .cadeado{display:none}
+
+  .combo{margin:0 0 14px;padding:13px 15px;border-radius:14px;background:#fff;border:1.5px dashed var(--gold);
+    display:none;align-items:center;justify-content:space-between;gap:10px}
+  .combo.show{display:flex}
+  .combo .txt{font-size:13.5px;color:var(--ink)}
+  .combo .txt b{color:var(--berry)}
+  .combo button{flex:0 0 auto;border:none;border-radius:11px;padding:10px 15px;font-size:13.5px;
+    font-weight:800;background:var(--ink);color:#fff;cursor:pointer;font-family:var(--body)}
+
+  .tudo-liberado{text-align:center;padding:20px 18px;color:var(--ok);font-weight:800;font-size:14.5px;
+    background:#f3fbf6;border:1px solid #cdeadb;border-radius:16px;margin-bottom:14px}
+
+  /* accordion de instalacao */
+  .acc{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:18px 0}
+  .acc-topo{margin:22px 0 16px;background:var(--cream)}
+  .acc summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;
+    justify-content:space-between;gap:10px;font-weight:800;font-size:15px;color:var(--ink)}
+  .acc summary::-webkit-details-marker{display:none}
+  .acc summary .chev{transition:transform .18s;color:var(--ink-soft);font-size:14px}
+  .acc[open] summary .chev{transform:rotate(180deg)}
+  .acc summary .ic{font-size:18px}
+  .acc-body{padding:0 18px 18px}
+  .acc-sub{margin:16px 0 14px}
+  .acc-sub:first-child{margin-top:0}
+  .acc-sub h3{font-size:14.5px;margin:0 0 10px;color:var(--berry);font-family:var(--body);font-weight:800}
+  .passos{display:flex;flex-direction:column;gap:12px;margin-left:2px;border-left:2px solid var(--line);padding-left:0}
+  .passo{position:relative;padding:0 0 0 28px}
+  .passo .n{position:absolute;left:-14px;top:-1px;width:26px;height:26px;border-radius:50%;
+    background:var(--berry);color:#fff;font-family:var(--disp);font-weight:800;font-size:12.5px;
+    display:flex;align-items:center;justify-content:center}
+  .passo b{display:block;font-size:14.5px}
+  .passo span{color:var(--ink-soft);font-size:13.5px}
+  .aviso{background:var(--cream);border:1px dashed var(--caramel);border-radius:13px;
+    padding:13px 15px;font-size:13.5px;color:#6a5340;margin-top:14px}
+  .aviso b{color:var(--ink)}
+
+  .privacidade{display:flex;gap:10px;align-items:flex-start;background:var(--cream);
+    border-radius:14px;padding:14px 16px;font-size:14px;color:var(--ink-soft)}
+  .privacidade .sel{font-size:20px}
+
   footer{text-align:center;color:var(--ink-soft);font-size:13px;margin-top:26px}
 </style>
 </head>
 <body>
+
 <header class="wrap">
   <span class="logo">🎂 Lucro Doceira</span>
   <h1>Seu bônus liberado</h1>
-  <p class="sub">Obrigada por levar o kit completo. Aqui estão seus dois novos acessos.</p>
+  <p class="sub">Obrigada por levar o kit completo. Seus acessos já estão liberados aqui embaixo.</p>
 </header>
+
 <div class="wrap">
-  <div class="card">
-    <div class="links">
-      <a href="../insumos/"><span class="ic">🧁</span><span>Biblioteca de Insumos<small>36 ingredientes com o custo já calculado</small></span></a>
-      <a href="../etiquetas/"><span class="ic">🏷️</span><span>Gerador de Etiqueta<small>Etiqueta dentro das normas da ANVISA</small></span></a>
+
+  <details class="acc acc-topo">
+    <summary><span><span class="ic">📲</span> Como instalar no celular</span><span class="chev">▾</span></summary>
+    <div class="acc-body">
+      <div class="acc-sub">
+        <h3>💻 No computador</h3>
+        <p style="color:var(--ink-soft);margin:0;font-size:14.5px">É só usar o botão abaixo. Abre numa aba do navegador (Chrome, Edge, o que você usar) e já está pronta pra usar. Pode salvar nos favoritos pra achar rápido depois.</p>
+      </div>
+      <div class="acc-sub">
+        <h3>📱 iPhone</h3>
+        <div class="passos">
+          <div class="passo"><div class="n">1</div><b>Abra o link no Safari</b><span>Se veio por e-mail, toque no link. Se abrir dentro do próprio app de e-mail, procure "abrir no Safari" (geralmente no canto de cima).</span></div>
+          <div class="passo"><div class="n">2</div><b>Toque no ícone de compartilhar</b><span>É o quadrado com uma seta pra cima, na barra de baixo do Safari.</span></div>
+          <div class="passo"><div class="n">3</div><b>Escolha "Adicionar à Tela de Início"</b><span>Pode precisar rolar a lista de opções pra achar.</span></div>
+          <div class="passo"><div class="n">4</div><b>Pronto, agora é um ícone seu</b><span>Toda vez que quiser calcular um preço, é só tocar nele, igual um aplicativo de verdade.</span></div>
+        </div>
+      </div>
+      <div class="acc-sub">
+        <h3>📱 Android</h3>
+        <div class="passos">
+          <div class="passo"><div class="n">1</div><b>Abra o link no Chrome</b><span>Toque no link recebido. Se abrir dentro de outro app, procure a opção de abrir no navegador.</span></div>
+          <div class="passo"><div class="n">2</div><b>Toque nos três pontinhos</b><span>Ficam no canto de cima do Chrome, do lado direito.</span></div>
+          <div class="passo"><div class="n">3</div><b>Escolha "Adicionar à tela inicial"</b></div>
+          <div class="passo"><div class="n">4</div><b>Pronto, agora é um ícone seu</b><span>Toda vez que quiser calcular um preço, é só tocar nele, igual um aplicativo de verdade.</span></div>
+        </div>
+        <div class="aviso"><b>Por que fazer isso:</b> assim a calculadora sempre lembra das suas receitas e dos seus preços salvos, do jeito que você deixou da última vez.</div>
+      </div>
+    </div>
+  </details>
+
+  <a class="abrir" href="../calculadora/">
+    <div class="ic">🧾</div>
+    <div class="tx">
+      <b>Abrir minha Calculadora de Preço</b>
+      <span>Receita, custos, preço e orçamento pro WhatsApp</span>
+    </div>
+    <div class="seta">→</div>
+  </a>
+
+  <div class="tudo-liberado" id="tudoLiberado" style="display:none">
+    ✓ Você já tem tudo liberado. Aproveite! 🎉
+  </div>
+
+  <div id="secaoOfertas">
+    <p class="titulo-secao" id="tituloSecao">Mais resultado, sem esforço a mais</p>
+
+    <div class="oferta" id="ofBump" data-produto="bump" data-preco="27"
+         data-checkout="https://pay.cakto.com.br/za77abr_1018310">
+      <span class="cadeado">🔒</span>
+      <div class="cad" id="cadBump"></div>
+      <div class="body">
+        <span class="tag">Pare de digitar preço na mão</span>
+        <p class="tit">Banco de 36 insumos + Gerador de Etiqueta</p>
+        <p class="ben">36 ingredientes mais usados já com o custo calculado, você só escolhe. E a etiqueta dentro das normas da ANVISA pronta em segundos, sem precisar saber nada de lei.</p>
+        <div class="rodape">
+          <span class="preco">à vista <b>R$ 27</b></span>
+          <button class="cta" data-comprar="bump">Destravar agora</button>
+        </div>
+        <div class="acessos">
+          <a href="../insumos/"><span class="ic">🧁</span><span>Biblioteca de Insumos<small>36 ingredientes com o custo já calculado</small></span></a>
+          <a href="../etiquetas/"><span class="ic">🏷️</span><span>Gerador de Etiqueta<small>Etiqueta dentro das normas da ANVISA</small></span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="oferta" id="ofUpsell" data-produto="upsell" data-preco="97"
+         data-checkout="https://pay.cakto.com.br/3cw9bu4_1018317">
+      <span class="cadeado">🔒</span>
+      <div class="cad" id="cadUpsell"></div>
+      <div class="body">
+        <span class="tag">Pra quando o cliente acha caro</span>
+        <p class="tit">Método Cobra Certo</p>
+        <p class="ben">O passo a passo pra sustentar seu preço sem perder cliente, com os scripts prontos pra defender o valor na hora que o cliente acha caro.</p>
+        <div class="rodape">
+          <span class="preco">à vista <b>R$ 97</b></span>
+          <button class="cta" data-comprar="upsell">Destravar agora</button>
+        </div>
+        <div class="acessos">
+          <a href="../cobrar-mais/"><span class="ic">💎</span><span>Método Cobra Certo<small>Scripts pra defender seu preço sem perder cliente</small></span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="combo" id="combo">
+      <span class="txt">Levar os <b>2</b> agora: <b id="comboPreco">R$ 124</b></span>
+      <button id="comboBtn">Destravar os 2</button>
     </div>
   </div>
-  <div class="dica">Dica: abre pelo celular e adiciona os dois na Tela de Início, do mesmo jeito que você já fez com a calculadora, pra sempre achar rápido.</div>
+
+  <div class="privacidade">
+    <span class="sel">🔒</span>
+    <span>Seus dados (receitas, preços, orçamentos) ficam salvos só no seu próprio celular ou computador. Nada é enviado pra internet, e ninguém além de você tem acesso.</span>
+  </div>
+
   <footer>Ficou com dúvida? Responde o e-mail que você recebeu da compra.</footer>
 </div>
+
+<script>window.PRODUTOS_COMPRADOS=["front","bump"];</script>
+<script>
+(function(){
+  "use strict";
+  var $=function(id){return document.getElementById(id)};
+
+  // Esta pagina e servida em 3 enderecos diferentes (como-usar/, seus-bonus/,
+  // metodo-cobra-certo/), um por produto, cada um com o proprio HTML.
+  // window.PRODUTOS_COMPRADOS e escrito no HTML de cada copia, ANTES deste
+  // script, dizendo o que aquele link especifico representa. Sem query string,
+  // sem localStorage: o endereco que a cliente recebeu por e-mail e a unica
+  // fonte da verdade daquele momento.
+  var comprados=window.PRODUTOS_COMPRADOS||["front"];
+  var cards={bump:{el:$("ofBump"),cad:$("cadBump")},upsell:{el:$("ofUpsell"),cad:$("cadUpsell")}};
+  var selecionados={};
+
+  function aplicaEstado(){
+    var faltam=Object.keys(cards).filter(function(k){return comprados.indexOf(k)===-1});
+    Object.keys(cards).forEach(function(k){
+      var c=cards[k];
+      var jaTem=comprados.indexOf(k)>-1;
+      c.el.classList.toggle("done",jaTem);
+      if(jaTem){c.cad.className="cad on";c.cad.textContent="✓";}
+    });
+    if(faltam.length===0){
+      // tudo comprado: mantem os cards visiveis (com os links de acesso reais
+      // dentro de cada um), so troca o titulo da secao e mostra o reforco.
+      $("tituloSecao").textContent="Seus produtos";
+      $("tudoLiberado").style.display="block";
+    }
+    atualizaCombo();
+  }
+  function atualizaCombo(){
+    var faltam=Object.keys(cards).filter(function(k){return comprados.indexOf(k)===-1;});
+    var marcados=faltam.filter(function(k){return selecionados[k]});
+    var combo=$("combo");
+    if(marcados.length>=2){
+      var total=marcados.reduce(function(s,k){return s+parseFloat(cards[k].el.getAttribute("data-preco"));},0);
+      $("comboPreco").textContent="R$ "+total.toLocaleString("pt-BR");
+      combo.classList.add("show");
+    }else{
+      combo.classList.remove("show");
+    }
+  }
+  function toggleSelecao(k){
+    if(comprados.indexOf(k)>-1)return;
+    selecionados[k]=!selecionados[k];
+    cards[k].cad.className="cad"+(selecionados[k]?" on":"");
+    if(selecionados[k])cards[k].cad.textContent="✓";
+    atualizaCombo();
+  }
+  Object.keys(cards).forEach(function(k){
+    cards[k].cad.addEventListener("click",function(){toggleSelecao(k)});
+  });
+
+  function irPraCheckout(k){
+    var url=cards[k].el.getAttribute("data-checkout");
+    var qs=location.search?location.search.slice(1):"";
+    window.open(qs?(url+(url.indexOf("?")>-1?"&":"?")+qs):url,"_blank");
+  }
+  [].slice.call(document.querySelectorAll("[data-comprar]")).forEach(function(b){
+    b.addEventListener("click",function(){irPraCheckout(b.getAttribute("data-comprar"))});
+  });
+  $("comboBtn").addEventListener("click",function(){
+    var faltam=Object.keys(cards).filter(function(k){return comprados.indexOf(k)===-1 && selecionados[k]});
+    faltam.forEach(function(k,i){setTimeout(function(){irPraCheckout(k)},i*450);});
+  });
+
+  aplicaEstado();
+})();
+</script>
 </body>
 </html>
